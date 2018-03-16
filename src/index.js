@@ -7,7 +7,7 @@ const makeMediumToYoutubeRequest = async ({ postInfo, userEmail }) => {
   let state = REQUESTED
   let request = { username, postId, userEmail, state }
   try {
-    await awsHelper.saveVideoRequest(request)
+    await awsHelper.putRequest(request)
     await awsHelper.startMediumToYoutubeTask(request)
   } catch (error) {
     state = ERROR
@@ -15,7 +15,7 @@ const makeMediumToYoutubeRequest = async ({ postInfo, userEmail }) => {
     request = { ...request, state, stateDescription }
     console.log(`Error starting medium to youtube task`)
     console.log(request)
-    await awsHelper.saveVideoRequest(request)
+    await awsHelper.putRequest(request)
   }
   return request
 }
@@ -40,4 +40,4 @@ const main = async (event, context) => {
   return context.succeed(request)
 }
 
-exports.handle = main
+exports.handler = main
