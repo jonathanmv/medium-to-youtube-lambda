@@ -13,13 +13,20 @@
   "jest": {
     "testEnvironment": "node"
   },
+  "babel": {
+    "presets": [
+      ["env", { "targets": { "node": "6.10" } } ]
+    ]
+  },
   "scripts": {
     "test": "jest",
-    "clean": "rm -rf build build.zip;",
-    "zip": "mkdir build; cp -fr src/* node_modules build && zip -rq build.zip build/*",
-    "build": "npm run clean; npm run zip",
+    "clean": "rm -rf compile build build.zip;",
+    "build": "npm run clean; npm run babel-build; npm run zip",
+    "babel-build": "babel src -d compile",
+    "move": "cp -fr compile/* src/*.json node_modules build",
+    "zip": "mkdir build; npm run move && zip -rq build.zip build/*",
     "update-lambda": "aws lambda update-function-code --function-name $npm_package_config_function --zip-file fileb://build.zip --publish",
-    "deploy": "npm run build && npm run update-lambda"
+    "deploy": "npm run build && npm run update-lambda && npm run clean"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +37,8 @@
     "bluebird": "3.5.1"
   },
   "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-preset-env": "1.6.1",
     "jest": "23.0.0-alpha.0"
   }
 }
