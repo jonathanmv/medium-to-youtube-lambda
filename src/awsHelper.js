@@ -46,7 +46,9 @@ const runMediumToYoutubeTask = (request = {}) => {
       subnets: [
         'subnet-b3be40f9'
       ],
-      assignPublicIp: 'DISABLED'
+      // Enabled so that no CannotPullContainerError is thrown
+      // https://forums.aws.amazon.com/thread.jspa?messageID=818289&tstart=0
+      assignPublicIp: 'ENABLED'
     }
   }
   const overrides = {
