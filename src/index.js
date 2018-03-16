@@ -31,7 +31,7 @@ const main = async (event, context) => {
   }
 
   const { username, postId } = postInfo
-  let request = await awsHelper.queryVideoRequest(username, postId)
+  let request = await awsHelper.getRequest(username, postId)
   if (request) {
     return context.succeed(request)
   }
