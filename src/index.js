@@ -1,5 +1,7 @@
 const { REQUESTED, ERROR } = require('./states.json')
 
+const mediumHelper = require('./mediumHelper')
+
 const makeMediumToYoutubeRequest = async ({ postInfo, userEmail }) => {
   const { username, postId } = postInfo
   let state = REQUESTED
@@ -21,6 +23,13 @@ const makeMediumToYoutubeRequest = async ({ postInfo, userEmail }) => {
 const main = async (event, context) => {
   const { postUrl, userEmail } = event
   const postInfo = await mediumHelper.getPostInfo(postUrl)
+  if (!postInfo) {
+    return context.succeed({
+      state: ERROR,
+      stateDescription: `Couldn't get the post information from ${postUrl}`
+    })
+  }
+
   const { username, postId } = postInfo
   let request = await awsHelper.queryVideoRequest(username, postId)
   if (request) {

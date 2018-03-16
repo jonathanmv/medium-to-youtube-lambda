@@ -1,3 +1,8 @@
+# To run tests
+
+1. Make sure you have installed Jest
+2. Run `npm test`
+
 # To deploy
 
 1. Make sure you have configured `aws cli`
