@@ -1,7 +1,9 @@
+const { REQUESTED } = require('../src/states.json')
 const awsHelper = require('../src/awsHelper')
 const {
   getRequest,
-  putRequest
+  putRequest,
+  runMediumToYoutubeTask
 } = awsHelper
 
 const postId = "edbf9d528e68"
@@ -27,5 +29,12 @@ describe.skip('putRequest', () => {
   it('should throw error if record is not saved', () => {
     const request = { username }
     return expect(putRequest(request)).rejects.toThrow()
+  })
+})
+
+describe.skip('runMediumToYoutubeTask', () => {
+  it('should run a task', () => {
+    const request = { username, postId, state: REQUESTED }
+    return expect(runMediumToYoutubeTask(request)).resolves.toBeUndefined()
   })
 })

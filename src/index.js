@@ -8,7 +8,7 @@ const makeMediumToYoutubeRequest = async ({ postInfo, userEmail }) => {
   let request = { username, postId, userEmail, state }
   try {
     await awsHelper.putRequest(request)
-    await awsHelper.startMediumToYoutubeTask(request)
+    await awsHelper.runMediumToYoutubeTask(request)
   } catch (error) {
     state = ERROR
     const stateDescription = error.message
