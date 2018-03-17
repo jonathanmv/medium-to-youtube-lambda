@@ -26,12 +26,12 @@ It was created from <a href="${postUrl}">${postTitle}</a> by ${username}.`
         text = `
 We are reading your post outloud and making a video from it.
 We usually take less than 10 minutes.
-You will receive an email soon at ${userEmail}.<br/>
+You will receive an email soon at ${userEmail}.<br/><br/>
 You can also read <a href="${postUrl}">${postTitle}</a> in the mean time.`
         break;
       case 'ERROR':
         title = `Oh no!!`
-        text = `Something went wrong while we created your video: ${stateDescription}.`
+        text = `Something went wrong while we created your video:<br/><br/>${stateDescription}.`
         break;
       default:
         title = `Something weird happened`
