@@ -26,7 +26,8 @@
     "move": "cp -fr compile/* src/*.json node_modules build",
     "zip": "mkdir build; npm run move && zip -rq build.zip build/*",
     "update-lambda": "aws lambda update-function-code --function-name $npm_package_config_function --zip-file fileb://build.zip --publish",
-    "deploy": "npm run build && npm run update-lambda && npm run clean"
+    "deploy": "npm run build && npm run update-lambda && npm run clean",
+    "deploy-site": "aws s3 sync website/ s3://autenti.ca"
   },
   "keywords": [],
   "author": "",

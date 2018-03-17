@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Make a YouTube video from a Medium post</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 text-center">
+          <h1 class="display-1">From Medium to YouTube</h1>
+          <p class="lead">Give a Medium Url. Get a YouTube Url</p>
+        </div>
+      </div>
+
+      <div id="request" class="row justify-content-center">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <form id="requestVideo">
+                <div class="form-group">
+                  <label for="postUrl">Medium Post Url</label>
+                  <input type="text" class="form-control" id="postUrl" name="postUrl" aria-describedby="emailHelp" placeholder="https://medium.com/@jonathanmv/cool-post" />
+                </div>
+                <div class="form-group">
+                  <label for="userEmail">Email</label>
+                  <input type="email" class="form-control" id="userEmail" name="userEmail" aria-describedby="emailHelp" placeholder="To notify you when your video is ready" />
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Send me the video</button>
+                <small id="submitHelp" class="form-text text-muted">Not convinced yet? Watch an <a target="_blank" href="https://www.youtube.com/watch?v=b-fVMcniCGU">example</a></small>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="results" class="row justify-content-center d-none">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 id="resultsTitle" class="card-title"></h5>
+              <p id="resultsText" class="card-text"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div/>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
