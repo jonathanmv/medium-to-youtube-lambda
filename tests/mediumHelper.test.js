@@ -3,11 +3,7 @@ const { getPostInfo } = mediumHelper
 
 const postUrl = `https://medium.com/@jonathanmv/faceless-influencer-edbf9d528e68`
 it.skip('should get info for post', () => {
-  const expected = {
-    "postId": "edbf9d528e68",
-    postUrl,
-    "username": "jonathanmv"
-  }
+  const expected = { "postId": "edbf9d528e68", "postTitle": "Faceless Influencer", "postUrl": "https://medium.com/@jonathanmv/faceless-influencer-edbf9d528e68", "username": "jonathanmv" }
   return expect(getPostInfo(postUrl)).resolves.toEqual(expected)
 })
 
