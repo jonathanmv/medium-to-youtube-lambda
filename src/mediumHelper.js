@@ -23,6 +23,7 @@ const getPostReference = data => _.get(data, 'payload.value')
 
 const getPostId = data => _.get(getPostReference(data), 'id')
 const getPostUrl = data => _.get(getPostReference(data), 'mediumUrl')
+const getPostTitle = data => _.get(getPostReference(data), 'title')
 
 const getUserReference = data => {
   const user = _.get(data, 'payload.references.User', {})
@@ -35,7 +36,8 @@ const getUsername = data => _.get(getUserReference(data), 'username')
 const buildPostInfo = data => ({
   username: getUsername(data),
   postId: getPostId(data),
-  postUrl: getPostUrl(data)
+  postUrl: getPostUrl(data),
+  postTitle: getPostTitle(data)
 })
 
 const getPostInfo = async postUrl => {

@@ -4,9 +4,9 @@ const mediumHelper = require('./mediumHelper')
 const awsHelper = require('./awsHelper')
 
 const makeMediumToYoutubeRequest = async ({ postInfo, userEmail }) => {
-  const { username, postId } = postInfo
+  const { username, postId, postUrl, postTitle } = postInfo
   let state = REQUESTED
-  let request = { username, postId, userEmail, state }
+  let request = { username, postId, postUrl, postTitle, userEmail, state }
   try {
     await awsHelper.putRequest(request)
     await awsHelper.runMediumToYoutubeTask(request)
