@@ -23,11 +23,11 @@
               <form id="requestVideo">
                 <div class="form-group">
                   <label for="postUrl">Medium Post Url</label>
-                  <input type="text" class="form-control" id="postUrl" name="postUrl" aria-describedby="emailHelp" placeholder="https://medium.com/@jonathanmv/cool-post" />
+                  <input required type="url" class="form-control" id="postUrl" name="postUrl" aria-describedby="emailHelp" placeholder="https://medium.com/@jonathanmv/cool-post" />
                 </div>
                 <div class="form-group">
                   <label for="userEmail">Email</label>
-                  <input type="email" class="form-control" id="userEmail" name="userEmail" aria-describedby="emailHelp" placeholder="To notify you when your video is ready" />
+                  <input required type="email" class="form-control" id="userEmail" name="userEmail" aria-describedby="emailHelp" placeholder="To notify you when your video is ready" />
                   <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <button type="submit" class="btn btn-primary">Send me the video</button>
