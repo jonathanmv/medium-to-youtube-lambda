@@ -61,7 +61,7 @@ const methods = {
         setTimeout(() => {
           this.success = false
           this.error = false
-        }, 5000)
+        }, 10000)
       })
       .catch(error => {
         this.subscribing = false
