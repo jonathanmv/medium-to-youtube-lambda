@@ -39,12 +39,16 @@
       </div>
     </nav>
 
+    <div v-if="notification" class="container fixed-top" style="margin-top: 64px;">
+      <div  class="alert" :class="{'alert-success':success, 'alert-warning':error}" role="alert">
+        {{notification}}
+      </div>
+    </div>
+
     <div class="pt-3 mt-5">
     </div>
+
     <div class="container">
-      <div v-if="subscribed" class="alert alert-success" role="alert">
-        You have been subscribed!
-      </div>
       <div class="jumbotron text-center">
         <h1 class="display-4">Select topics below!</h1>
         <p class="lead">
@@ -62,7 +66,9 @@
             <div class="card" v-for="(topic, topicIndex) in header.topics" :key="topic.slug">
               <div class="card-body">
                 <div class="row">
-                  <h4 class="card-title col-auto mr-auto">{{topic.name}}</h5>
+                  <h5 class="card-title col-auto mr-auto">
+                      {{topic.name}}
+                  </h5>
                     <button
                     class="btn col-auto mr-3"
                     v-bind:class="{ 'btn-success': isSelected(topic), 'btn-outline-success': !isSelected(topic) && canAddMore , 'btn-outline-warning': !isSelected(topic) && !canAddMore }"

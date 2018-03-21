@@ -5,7 +5,8 @@ const data = Object.assign({
   userEmail: '',
   MAX_ALLOWED_TOPICS,
   subscribing: false,
-  subscribed: false
+  success: false,
+  error: false
 }, topicsHelper)
 
 const computed = {
@@ -18,6 +19,9 @@ const computed = {
   canSubscribe() {
     const { userEmail, selectedTopicSlugs: tags } = this
     return userEmail.length && tags.length
+  },
+  notification() {
+    return this.success || this.error
   }
 }
 
@@ -50,14 +54,19 @@ const methods = {
     this.subscribing = true
     const params = { userEmail, tags }
     apiClient.subscribeUserToTags(params)
-      .then(results => {
+      .then(({status, statusDescription }) => {
         this.subscribing = false
-        this.subscribed = true
-        setTimeout(() => this.subscribed = false, 5000)
+        this.success = status == 'ACTIVE' && `You have been subscribed! Thank you!`
+        this.error = status == 'ERROR' && statusDescription
+        setTimeout(() => {
+          this.success = false
+          this.error = false
+        }, 5000)
       })
       .catch(error => {
         this.subscribing = false
-        this.subscribed = false
+        this.success = false
+        this.error = `Oh no!! There's an error: ${error.message}. Please try again :)`
       })
   }
 }
