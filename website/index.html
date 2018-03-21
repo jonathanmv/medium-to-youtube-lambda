@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Let us make a video for you</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+  <div id="app">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="#">Selected Topics: </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"
+              v-for="(topic, topicIndex) in selectedTopics" :key="topic.slug"
+              >
+              <button class="nav-link btn btn-sm btn-outline-success mx-2"
+                @click="removeSelection(topic)">
+                {{topic.name}}
+              </button>
+            </li>
+          </ul>
+
+          <form class="form-inline my-2 my-lg-0" v-on:submit.prevent="onSubscribe">
+            <input required class="form-control mr-sm-2" type="email" placeholder="your@email.com" aria-label="Email" v-model="userEmail" name="userEmail">
+            <button class="btn my-2 my-sm-0" type="submit"
+              :class="{'btn-outline-success': !canSubscribe, 'btn-success': canSubscribe}"
+              >
+              {{ subscribing ? 'Subscribing ...' : 'Subscribe' }}
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </nav>
+
+    <div class="pt-3 mt-5">
+    </div>
+    <div class="container">
+      <div v-if="subscribed" class="alert alert-success" role="alert">
+        You have been subscribed!
+      </div>
+      <div class="jumbotron text-center">
+        <h1 class="display-4">Select topics below!</h1>
+        <p class="lead">
+          We will create one video per day from new posts in the topics you select and send it to your email.
+          <br/>
+          Go ahead an select up to {{MAX_ALLOWED_TOPICS}} topics
+        </p>
+      </div>
+
+      <div id="header-list" >
+        <section v-for="(header, headerIndex) in headers" class="pt-3 mb-3">
+          <header class="h4">{{ header.title }}</header>
+          <hr/>
+          <div class="header-topics card-columns container">
+            <div class="card" v-for="(topic, topicIndex) in header.topics" :key="topic.slug">
+              <div class="card-body">
+                <div class="row">
+                  <h4 class="card-title col-auto mr-auto">{{topic.name}}</h5>
+                    <button
+                    class="btn col-auto mr-3"
+                    v-bind:class="{ 'btn-success': isSelected(topic), 'btn-outline-success': !isSelected(topic) && canAddMore , 'btn-outline-warning': !isSelected(topic) && !canAddMore }"
+                    @click="toggleSelection(topic)"
+                    >
+                    {{isSelected(topic) ? '-' : '+'}}
+                  </button>
+                </div>
+              </div>
+              <a target="_blank" :href="topic.mediumUrl">
+                <img class="card-img-bottom" :src="topic.thumbnailUrl" alt="" />
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="js/apiClient.js"></script>
+  <script src="js/topicsHelper.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

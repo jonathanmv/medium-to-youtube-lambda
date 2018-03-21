@@ -44,15 +44,11 @@ You can also read <a href="${postUrl}">${postTitle}</a> in the mean time.`
     event.preventDefault()
     updateResults('On my way!', `Sending request to create the video...`)
     const form = event.target
-    const body = JSON.stringify({
+    const params = {
       userEmail: form.userEmail.value,
       postUrl: form.postUrl.value
-    })
-    const method = 'POST'
-    const headers = new Headers({ 'Content-Type': 'application/json' })
-    const url = 'https://qva6m7vzvh.execute-api.us-east-1.amazonaws.com/production/make'
-    fetch(url, { body, method, headers })
-      .then(response => response.json())
+    }
+    apiClient.makeVideoFromPost(params)
       .then(handleResults)
       .catch(error => console.log(error))
   }
