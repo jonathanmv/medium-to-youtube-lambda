@@ -6,6 +6,7 @@ const db = bluebird.promisifyAll(new aws.DynamoDB.DocumentClient(config))
 const ecs = bluebird.promisifyAll(new aws.ECS(config))
 
 const REQUESTS_TABLE_NAME = 'medium-to-youtube-requests'
+const SUBSCRIPTIONS_TABLE_NAME = 'medium-to-youtube-subscriptions'
 
 const getRequest = (username, postId) => {
   const Key = { username, postId }
@@ -21,6 +22,18 @@ const getRequest = (username, postId) => {
 
 const putRequest = Item => {
   const TableName = REQUESTS_TABLE_NAME
+  const params = { TableName, Item }
+  return db.putAsync(params)
+    .then(_ => Item)
+    .catch(error => {
+      console.log(`Error putting request from db: ${error.message}`)
+      console.log(params)
+      throw error
+    })
+}
+
+const putSubscription = Item => {
+  const TableName = SUBSCRIPTIONS_TABLE_NAME
   const params = { TableName, Item }
   return db.putAsync(params)
     .then(_ => Item)
@@ -88,5 +101,6 @@ const runMediumToYoutubeTask = (request = {}) => {
 module.exports = {
   getRequest,
   putRequest,
-  runMediumToYoutubeTask
+  runMediumToYoutubeTask,
+  putSubscription
 }
