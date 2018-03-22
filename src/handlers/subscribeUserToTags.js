@@ -4,9 +4,9 @@ const mediumHelper = require('../mediumHelper')
 const awsHelper = require('../awsHelper')
 
 const saveSubscription = ({ userEmail, tags }) => {
-  const status = ACTIVE
+  const state = ACTIVE
   const subscribedAt = new Date().getTime()
-  const subscription = { userEmail, tags, status, subscribedAt }
+  const subscription = { userEmail, tags, state, subscribedAt }
   return awsHelper.putSubscription(subscription)
 }
 
