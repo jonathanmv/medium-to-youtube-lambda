@@ -54,10 +54,10 @@ const methods = {
     this.subscribing = true
     const params = { userEmail, tags }
     apiClient.subscribeUserToTags(params)
-      .then(({status, statusDescription }) => {
+      .then(({state, stateDescription }) => {
         this.subscribing = false
-        this.success = status == 'ACTIVE' && `You have been subscribed! You will get your first email tomorrow. Thank you!`
-        this.error = status == 'ERROR' && statusDescription
+        this.success = state == 'ACTIVE' && `You have been subscribed! You will get your first email tomorrow. Thank you!`
+        this.error = state == 'ERROR' && stateDescription
         setTimeout(() => {
           this.success = false
           this.error = false
